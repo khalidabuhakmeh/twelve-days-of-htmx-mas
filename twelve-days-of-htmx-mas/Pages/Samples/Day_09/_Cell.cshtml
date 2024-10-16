@@ -1,0 +1,13 @@
+@model Cell
+<div
+    id="@Model.Id"
+    class="smooth"
+    hx-get
+    hx-page="Index"
+    hx-page-handler="Cell"
+    hx-route-id="@Model.Id"
+    hx-trigger="every 1s"
+    hx-swap="outerHTML"
+    style="background-color: @Model.Color; width: 100px; height: 100px; border-radius: 50%;">
+    <img src="~/img/light.png" alt="light-bulb" height="100%"/>
+</div>

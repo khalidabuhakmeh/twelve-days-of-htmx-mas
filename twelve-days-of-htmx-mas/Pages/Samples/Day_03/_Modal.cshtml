@@ -1,0 +1,22 @@
+@using System.Globalization
+<div id="myModal" class="modal text-center" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title ">Opening the present...</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h1 class="text-center">You got a GameDude!</h1>
+                <img src="~/img/gameboy.svg" alt="handheld game console" width="400" height="400"/>
+                <p class="fw-bold">Remember this moment: @DateTime.Now.ToString(CultureInfo.InvariantCulture)</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    showModal("myModal");
+    </script>
+</div>

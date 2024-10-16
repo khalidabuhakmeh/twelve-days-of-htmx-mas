@@ -1,0 +1,30 @@
+@model IndexModel
+
+<table id="people" class="table">
+    <thead class="bg-danger text-white">
+    <tr hx-target="#people" hx-swap="outerHTML">
+        <th hx-get hx-page="Index" hx-route-SortBy="Id" scope="col" role="button">
+            @if (Model.SortBy == nameof(Person.Id)) { <span>❄︎</span> }
+            #
+        </th>
+        <th hx-get hx-page="Index" hx-route-SortBy="Name" scope="col" role="button">
+            @if (Model.SortBy == nameof(Person.Name)) { <span>❄︎</span> }
+            Name
+        </th>
+        <th hx-get hx-page="Index" hx-route-SortBy="Behavior" scope="col" role="button">
+            @if (Model.SortBy == nameof(Person.Behavior)) { <span>❄︎</span> }
+            Behavior
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var person in Model.People)
+    {
+        <tr>
+            <td>@person.Id</td>
+            <td>@person.Name</td>
+            <td>@person.Behavior</td>
+        </tr>
+    }
+    </tbody>
+</table>

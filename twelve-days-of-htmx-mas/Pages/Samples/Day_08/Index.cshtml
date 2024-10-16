@@ -1,0 +1,31 @@
+@page
+@model Htmxmas.Pages.Samples.Day_08.IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 8: Progress Bars and Jobs
+            
+            Server-based applications allow for user's to start asynchronous jobs that can be monitored and managed. One of the most common UI patterns is to show a progress bar while the job is running and then update the UI when the job is complete.
+            
+            This particular example shows how to start and monitor a job using Htmx.
+            
+            ## How Does This Work?
+            
+            When you start the job, we return an element with a timer trigger, which periodically checks the job status on the server. If the job is not complete, the progress bar will update with the completeness percentage. If the job is complete, the progress bar is set to 100% and the trigger is finally set to `none`, disabling any more updates to the progress bar.
+            
+            This technique is useful for more interactive and monitoring scenarios where you want to track the status of any resource on the server.
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(8))
+    </div>
+    <div class="col">
+        <h5>Important Workshop Tasks</h5>
+        <p>
+            The elves are busy working on shipping gifts for all the boys and girls.
+        </p>
+        @await Html.PartialAsync("_Job")
+    </div>
+</div>
+
+

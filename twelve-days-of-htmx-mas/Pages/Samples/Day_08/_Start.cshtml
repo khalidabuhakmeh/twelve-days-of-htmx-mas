@@ -1,0 +1,50 @@
+@model IndexModel
+
+@{
+  var trigger = Model.IsComplete ? "done" : "every 600ms";
+}
+
+<div id="progress-area" class="card">
+  <div class="card-header">
+    <h5 role="status" tabindex="-1">
+      @(Model.IsComplete ? "Job Complete" : "Job In Progress")
+    </h5>
+  </div>
+  <div class="card-body">
+    <div
+      hx-get
+      hx-page="Index"
+      hx-page-handler="Progress"
+      hx-route-CurrentProgress="@Model.CurrentProgress"
+      hx-trigger="@trigger"
+      hx-target="#progress-area"
+      hx-swap="outerHTML">
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+           aria-labelledby="pblabel">
+        <div id="pb" class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+             style="width:@Model.CurrentProgress%">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    @if (Model.IsComplete)
+    {
+      <button class="btn btn-danger mt-3"
+              hx-post
+              hx-page="Index"
+              hx-page-handler="Start"
+              hx-target="#progress-area"
+              hx-swap="outerHTML">
+        Restart Job
+      </button>
+    }
+    else
+    {
+      <button class="btn btn-outline-dark mt-3" disabled="disabled">
+        Restart Job
+      </button>
+    }
+  </div>
+</div>

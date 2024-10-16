@@ -1,0 +1,69 @@
+@page
+@model Htmxmas.Pages.Samples.Day_11.IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 11: Are You Sure About That?
+
+            Sometimes you want to make sure that the user really wants to do something, especially if it's a destructive
+            action.
+            This is where the `hx-confirm` attribute comes in. By adding `hx-confirm` to any Htmx element, you can
+            specify a message that will be displayed to the user before the action is taken. If the user confirms, the
+            action is taken. If the user cancels, the action is not taken.
+
+            This can help save your users from accidentally doing something they didn't mean to do.
+
+            ## How Does This Work?
+            
+            Add a `hx-confirm` attribute to any Htmx element along with a message. The user will be prompted to
+            either confirm or cancel the action. It's that simple.
+            
+            ```razor
+            <button hx-get
+                    hx-page="Index"
+                    hx-page-handler="Allow"
+                    hx-target="#rudolph"
+                    hx-swap="outerHTML"
+                    hx-confirm="Are you sure you want to play the reinder games?"
+                    class="btn btn-danger">
+                Allow
+            </button>
+            ```
+        </markdown>
+        @await Html.PartialAsync("_Paging", new PagingModel(11))
+    </div>
+    <div class="col">
+        <div class="card text-center">
+            <div class="card-header">
+                <h2>Rudolph Really Wants To Play</h2>
+            </div>
+            <div class="card-body text-center">
+                <img id="rudolph"
+                     src="~/img/rudolph_sad.png"
+                     alt="sad rudolph"
+                     class="img-fluid"/>
+            </div>
+            <div class="card-footer text-center">
+                <button hx-get
+                        hx-page="Index"
+                        hx-page-handler="Allow"
+                        hx-target="#rudolph"
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure you want to play the reinder games?"
+                        class="btn btn-danger">
+                    Allow
+                </button>
+                <button hx-get
+                        hx-page="Index"
+                        hx-page-handler="Disallow"
+                        hx-target="#rudolph"
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure you want to stop the reinder games?"
+                        class="btn btn-outline-danger">
+                    Disallow
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

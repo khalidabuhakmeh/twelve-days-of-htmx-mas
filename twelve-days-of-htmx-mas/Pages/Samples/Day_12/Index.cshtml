@@ -1,0 +1,77 @@
+@page
+@model Htmxmas.Pages.Samples.Day_12.IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 12: Keyboard Shortcuts
+            
+            While clicking is a great way to interact with a web page, power users crave the ability to
+            interact with a web page using the keyboard.
+            
+            This sample demonstrates how to use keyboard shortcuts to interact with a web page. Press any of the matching
+            keyboard keys to trigger the appropriate button and interaction.
+            
+            ## How Does This Work?
+            
+            Htmx allows for the `hx-trigger` attribute to specify a keyboard shortcut. The `keyup` event is used
+            to listen for the keyboard shortcut. The `key` attribute is used to specify the key that should be pressed.
+            
+            ```html
+            <button class="btn btn-danger" hx-trigger="click, keyup[key=='h'||key=='H'] from:body"
+                    hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="hat">
+                H
+            </button>
+            ```
+            
+            It's important to note that the `from:body` is needed, since the event is triggered from the body of the page. We also
+            listen for casing variants of the specific letter key. You can also listen for multiple keys to be pressed at once for a
+            more complex shortcut.
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(12))
+    </div>
+    <div class="col-6">
+        <style>
+            #card.htmx-added {
+                opacity: 0;
+            }
+
+            #card {
+                opacity: 1;
+                transition: opacity 1s ease-out;
+            }
+        </style>
+
+        <div class="card text-center">
+            <div class="card-header">
+                <h2>Keyboard Shortcuts</h2>
+                <p>Press the keyboard keys of
+                    <kbd>H</kbd>, <kbd>J</kbd>, <kbd>M</kbd>, or <kbd>S</kbd>
+                </p>
+            </div>
+            <div class="card-body">
+                <img id="card" src="~/img/cards/question.png" class="img-fluid" alt="question mark"/>
+            </div>
+            <div class="card-footer text-center" hx-target="#card" hx-swap="outerHTML">
+                <button class="btn btn-danger" hx-trigger="click, keyup[key=='h'||key=='H'] from:body"
+                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="hat">
+                    H
+                </button>
+                <button class="btn btn-danger" hx-trigger="click, keyup[key=='j'||key=='J'] from:body"
+                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="jacket">
+                    J
+                </button>
+                <button class="btn btn-danger" hx-trigger="click, keyup[key=='m'||key=='M'] from:body"
+                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="mittens">
+                    M
+                </button>
+                <button class="btn btn-danger" hx-trigger="click, keyup[key=='s'||key=='S'] from:body"
+                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="socks">
+                    S
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

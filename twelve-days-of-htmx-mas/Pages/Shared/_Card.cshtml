@@ -1,0 +1,11 @@
+@model ViewModels.CardDetails
+
+<div class="card mb-3">
+    <div class="card-header mountains-of-christmas-regular bg-danger text-white">#@Model.Number</div>
+    <img class="card-img-top" src="@Url.Content(@Model.ImageUrl)" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title mountains-of-christmas-bold">@Model.Title</h5>
+        <p class="card-text">@Model.Description</p>
+        <a asp-page="@Model.Page" class="btn btn-outline-danger">Learn Now</a>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+@page
+@model Htmxmas.Pages.Samples.Day_06.IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 6: Naughty or Nice?
+            
+            Tables are a common UI element in many applications. It is a good way to present data in a compact and easy to read format.
+            
+            Users also find it useful to be able to sort the data in a table. This is especially useful when the data is large and the user wants to quickly find a specific record.
+            
+            This sample demonstrates how to create a table with sorting capabilities.
+            
+            ## How Does This Work?
+            
+            Each column on the table has an `hx-get` attribute that triggers a request to the server that returns the data sorted by that column. After the 
+            server returns the response, the table is switched into place.
+            
+            ```razor
+            <tr hx-target="#people" hx-swap="outerHTML">
+                <th hx-get hx-page="Index" hx-route-SortBy="Id" scope="col" role="button">
+                    @@if (Model.SortBy == nameof(Person.Id)) { <span>❄︎</span> } #
+                </th>
+                <!-- more columns -->
+            </tr>
+            ```
+            To track which column is being sorted, you can always pass data back and forth to manage the sorting state. 
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(6))
+    </div>
+    <div class="col-6">
+        <h4>Santa's Naughty &amp; Nice List</h4>
+        <p>Click the headers to sort</p>
+        @await Html.PartialAsync("_Table")
+    </div>
+</div>

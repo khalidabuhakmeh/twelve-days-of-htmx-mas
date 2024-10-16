@@ -1,0 +1,42 @@
+@page
+@model Htmxmas.Pages.Samples.Day_09.IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 9: Christmas Lights Dashboard
+            
+            This is a dashboard that continuously updates the colors of the lights from a random color palette. Not only does it update the colors, but it also animates the transition from one color to another. This happens because each element has a unique identifier. If the response returns an HTML element with the same identifier, the element can be animated into the DOM using CSS transitions. Notice the smooth glow of each light as it transitions from one color to another.
+            
+            ## How Does This Work?
+            
+            Each light bulb has a unique identifier and the trigger is based on a timer of **1 second**. Each trigger passes the current identifier to the server, which re-renders the light bulb with a randomly chosen color along with the unique identifier.
+            
+            Using this technique can make the update experience much smoother and less jarring for users. It can also help notify
+            users of an obvious change in the UI. Ultimately making the experience more responsive and enjoyable.
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(9))
+    </div>
+    <div class="col-6">
+        <style>
+            .smooth {
+                transition: all 1s ease-in;
+            }
+        </style>
+        <div class="container">
+            <h2 class="text-center">The Glow of Lights</h2>
+            @for (var row = 1; row <= 4; row++)
+            {
+                <div class="d-flex justify-content-between">
+                    @for (var col = 1; col <= 4; col++)
+                    {
+                        <div class="m-2 text-center">
+                            @await Html.PartialAsync("_Cell", new Cell($"cell{row}{col}", Model.PickRandomColor()))
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

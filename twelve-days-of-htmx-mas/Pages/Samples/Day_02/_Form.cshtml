@@ -1,0 +1,34 @@
+@model Htmxmas.Pages.Samples.Day_02.IndexModel
+
+<form asp-page="Index" method="post"
+      hx-post
+      hx-swap="outerHtml">
+    
+    <h5 class="mountains-of-christmas-regular text-decoration-underline">
+        Santa's Request Form
+    </h5>
+    
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Present"></label>
+        <input asp-for="Present" class="form-control"/>
+        <span asp-validation-for="Present" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Behavior"></label>
+        <select
+                class="form-control"
+                asp-for="Behavior"  
+                asp-items="@IndexModel.BehaviorOptions">
+        </select>
+        <span asp-validation-for="Behavior" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-danger mt-3" type="submit">Submit</button>
+</form>

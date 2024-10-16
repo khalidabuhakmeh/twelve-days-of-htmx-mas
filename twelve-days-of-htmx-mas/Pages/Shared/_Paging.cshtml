@@ -1,0 +1,28 @@
+@model PagingModel
+
+@{
+    var nextDay = $"/Samples/Day_{Model.NextDay:00}/Index";
+    var previousDay = $"/Samples/Day_{Model.PreviousDay:00}/Index";
+}
+
+<nav aria-label="next and previous days">
+    <ul class="pagination justify-content-center">
+        
+        @if (Model.HasPreviousDay)
+        {
+            <li class="page-item"><a class="page-link text-danger" asp-page="@previousDay">Previous</a></li>
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link text-danger" asp-page="/Index">Home</a></li>
+        }
+        @if (Model.HasNextDay)
+        {
+            <li class="page-item"><a class="page-link text-danger" asp-page="@nextDay">Next</a></li>
+        }
+        else
+        {
+            <li class="page-item"><a class="page-link text-danger" asp-page="/Index">Home</a></li>
+        }
+    </ul>
+</nav>

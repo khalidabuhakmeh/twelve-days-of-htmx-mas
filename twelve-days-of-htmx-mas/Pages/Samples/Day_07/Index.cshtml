@@ -1,0 +1,48 @@
+@page
+@model Htmxmas.Pages.Samples.Day_07.IndexModel
+
+
+<div class="row">
+  <div class="col-6">
+    <markdown>
+      # Day 7: Gift Search As You Type
+      
+      Users have come to expect search experiences that are fast, responsive, and intuitive. The search-as-you-type experience is a great way to provide this.
+      This sample demonstrates how easy it can be to add this functionality to your application.
+      
+      ## How Does This Work?
+      
+      You can look at the code on this page, but in general, we listed for the `changed` event on any input located
+      within our HTML form with a delay of `500ms`. When this event fires, we make a request to the server with the
+      search criteria. The server then returns a list of results. We then swap the contents of our search results
+      container with the results.
+      
+      Using an HTML form allows us to send more information than just what the user types. This could include radio buttons, checkboxes,
+      or other information that is relevant to the search.
+    </markdown>
+    
+    @await Html.PartialAsync("_Paging", new PagingModel(7))
+  </div>
+  <div class="col-6">
+    <form hx-get
+          method="get" asp-page="Index"
+          hx-swap="outerHTML"
+          hx-trigger="keyup changed delay:500ms"
+          hx-target="#search-results">
+      <div class="input-group mb-3">
+        <input type="text" asp-for="Search" 
+               class="form-control" 
+               placeholder="Search..." 
+               aria-label="search criteria">
+        <div class="input-group-append">
+          <button class="btn btn-outline-danger" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+
+    @await Html.PartialAsync("_Results")
+
+  </div>
+
+
+</div>

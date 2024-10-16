@@ -1,0 +1,83 @@
+@page
+@model Htmxmas.Pages.Samples.Day_10.IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 10: Out of Band Swaps
+            
+            So far we've seen Htmx replace triggering elements and target elements when a request is made. There is
+            one more technique that we can use to trigger swaps, known as out of band swaps. Out of band swaps
+            allow us to smuggle additional HTML into the response from the server that may be unrelated
+            to our existing interaction.
+
+            ## How Does This Work?
+            
+            Out of band swaps are triggered by adding a `hx-swap-oob` attribute to any HTML in the response. Htmx will
+            attempt to find the first element on the page with that identifier and swap it with the response HTML element. The
+            rest of the response will be processed as usual.
+            
+            ```csharp
+            public ContentResult OnGetColoredSweater()
+            {
+                return Content(
+                    $"""
+                     <img 
+                          id="sweater"
+                          alt="colored sweater"
+                          hx-swap-oob="true"
+                          class="img-fluid"
+                          src="~/img/sweater_color.png" >
+                     """
+                );
+            }
+            ```
+            
+            This technique is useful for replacing display elements such as a shopping cart, users on a site, account
+            information, etc. 
+            
+            Be sure to use this technique sparingly as it can add conceptual overhead to your application as
+            out of band information will need to be added to responses in addition to the existing interaction. It's
+            still a useful technique to be aware of, however.
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(10))
+    </div>
+    <div class="col-6">
+        <div
+            class="card text-center"
+            hx-get
+            hx-page="Index"
+            hx-page-handler="UncoloredSweater"
+            hx-trigger="reset"
+            hx-target="#sweater"
+            hx-swap="outerHTML"
+            >
+                <div class="card-header">
+                    <h2>Is This My Sweater?</h2>
+                </div>
+                <div class="card-body">
+                @await Html.PartialAsync("_Image")
+            </div>
+            <div class="card-footer">
+                <button
+                    type="button"
+                    hx-get
+                    hx-page="Index"
+                    hx-page-handler="ColoredSweater"
+                    hx-swap="none"
+                    class="btn btn-danger">Color
+                </button>
+                <button type="button"
+                        hx-get
+                        hx-page="Index"
+                        hx-page-handler="Reset"
+                        hx-swap="none"
+                        class="btn btn-outline-danger">Reset
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>

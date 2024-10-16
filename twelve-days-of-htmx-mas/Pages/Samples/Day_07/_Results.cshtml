@@ -1,0 +1,15 @@
+@model IndexModel
+
+<div id="search-results">
+  <h5 class="mountains-of-christmas-regular text-decoration-underline fs-3">Christmas Gift List</h5>
+  <ul class="list-group">
+    @foreach (var item in Model.Results)
+    {
+      <li class="list-group-item">@item</li>
+    }
+  </ul>
+  <p class="my-3 text-center">
+    🔎 Showing @Model.Results.Count() of @Model.TotalCount
+  </p>
+</div>
+

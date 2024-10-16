@@ -1,0 +1,69 @@
+@page
+@model Htmxmas.Pages.Samples.Day_03.Index
+
+<div class="row">
+    <div class="col">
+        <markdown>
+            # Day 3: Everyone Loves a Modal
+
+            Modals are a great way to show critical information to the user, and are typically used to interrupt users
+            with a task that requires them to make a decision.
+
+            This page uses the [bootstrap modal](https://getbootstrap.com/docs/5.1/components/modal/) to show a modal
+            when the gift is clicked. All the information found in the modal is decided on the server.
+
+            What could be hiding in the box? Click to find out.
+
+            ## How Does This Work?
+
+            You can find the code for this sample on this page in `Day_03`, alongside the partial view of
+            `Day_03/Modal`.
+            The gift is an `a` tag with a `hx-get` attribute. This tells htmx to make a GET request to the server when
+            the
+            anchor is clicked. The server responds with a Bootstrap modal. Using Bootstrap's JavaScript, the modal is
+            shown. The JavaScript is
+            optional and unique to Bootstrap, but it shows how Htmx can execute JavaScript by embedding a script tag in
+            the response.
+            
+            **Pay attention to the time stamp on the modal. It changes with every request to show the interaction with the server.** 
+
+            ```razor
+            <script>showModal("myModal");</script>
+            ```
+            
+            It's a neat trick to bridge the gap between the server and the clientside code.
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(3))
+    </div>
+    <div class="col text-center">
+        <h3>Click gift to open</h3>
+        <a asp-page="Index"
+           hx-get
+           hx-page="Index"
+           hx-page-handler="Modal"
+           hx-target="#modal"
+           hx-swap="innerHtml"
+        >
+            <img src="~/img/gift.svg" alt="wrapped gift box"/>
+        </a>
+    </div>
+
+</div>
+
+
+
+<div id="modal"></div>
+
+<script>
+    // this is bootstrap 5 code
+    function showModal(id) {
+        const element = document.getElementById(id);
+        const modal = new bootstrap.Modal(element, {})
+        element.addEventListener('hidden.bs.modal', function () {
+            modal.dispose();
+            element.remove();
+        })
+        modal.show();
+    }
+</script>

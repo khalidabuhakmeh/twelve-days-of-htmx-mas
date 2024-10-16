@@ -1,0 +1,32 @@
+@model Pages.Samples.Day_01.IndexModel
+
+<div id="counter" class="card text-center text-lg-center">
+    <div class="card-header">
+        <h5 class="mountains-of-christmas-bold">Current Count</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text mountains-of-christmas-regular">
+            <span id="count-label" class="text-danger" style="font-size: 10em;">
+                @Model.Count
+            </span>
+        </p>
+    </div>
+    <div class="card-footer">
+         <button class="btn btn-danger"
+                hx-post
+                hx-page="Index"
+                hx-page-handler="Increment"
+                hx-swap="outerHTML"
+                hx-target="#counter">
+            Increment
+        </button>
+        <button class="btn btn-outline-danger"
+                hx-post
+                hx-page="Index"
+                hx-page-handler="Reset"
+                hx-swap="outerHTML"
+                hx-target="#counter">
+            Reset
+        </button>
+    </div>
+</div>

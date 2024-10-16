@@ -1,0 +1,41 @@
+@page "/samples/day/02/"
+@model IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 2: HTML Forms
+
+            HTML forms are the bread and butter of web applications. Without forms, many web applications would simply be static pages. ASP.NET Core provides a great experience for building forms and for validating user input. Combining the power of HTML with the flexibility of C# makes it easy to build powerful, dynamic web applications.
+            
+            In this sample, we'll use Htmx to enhance the existing experience by avoiding a full page refresh and by updating the UI with validation information or a success message.
+            
+            ## How Does This Work?
+            
+            Seen in the `Day_02/_Form` partial view, the form is submitted using the `hx-post` attribute. This attribute tells Htmx to send the form data to the server using a POST request.The form is also configured to use the `hx-target` attribute to specify the element that should be updated with the response from the server. The form is progressively enhanced, so it can also submit data even if JavaScript is disabled. The form only has two Htmx attributes of `hx-post` and `hx-swap`.
+            
+            **An Important Note: ASP.NET Core Antiforgery tokens are automatically added to all forms, but any non-GET request will require you to add an Antiforgery token yourself. Luckily, Htmx.Net can handle that for you.**
+            
+            As is seen in the C# part of the interaction, it's very familiar-looking C# code.
+            
+            ```csharp
+            public IActionResult OnPost()
+            {
+                if (!ModelState.IsValid)
+                {
+                    return Partial("_Form", this);
+                }
+
+                return Partial("_Alert", this);
+            }
+            ```
+            
+            Try out the form on the right to see it in action.
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(2))
+    </div>
+    <div class="col">
+        @await Html.PartialAsync("_Form")
+    </div>
+</div>

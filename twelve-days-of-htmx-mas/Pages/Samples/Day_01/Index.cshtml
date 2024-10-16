@@ -1,0 +1,61 @@
+@page "/samples/day/01/"
+@model IndexModel
+
+<div class="row">
+    <div class="col-6">
+        <markdown>
+            # Day 1: Hello Counter!
+
+            The first sample shows the basic flow of a Htmx interaction. You can click the button to increment the
+            current count.
+
+            The user interaction triggers a server request to the backend. The backend increments the counter and
+            returns a new HTML snippet. The frontend then updates the HTML with the new content. All state is managed in
+            the backend, where you have access to all the resources typically available in a .NET Core application. This
+            includes databases, file systems, user auth, and more. The use of Htmx creates a clear separation of
+            concerns between the frontend and backend which is much easier to maintain and understand.
+
+            ## How Does This Work?
+
+            If we look at the `Day_01/_Count` partial view, you'll see our buttons are decorates with `hx-` attributes.
+            These attributes tell Htmx what to do when the user interacts with the element. In this sample, we're leaning on
+            Htmx.Net to generate URLs based on our routing definitions.
+
+            ```razor
+            <button class="btn btn-danger"
+                    hx-post
+                    hx-page="Index"
+                    hx-page-handler="Increment"
+                    hx-swap="outerHTML"
+                    hx-target="#counter">
+                Increment
+            </button>
+            <button class="btn btn-outline-danger"
+                    hx-post
+                    hx-page="Index"
+                    hx-page-handler="Reset"
+                    hx-swap="outerHTML"
+                    hx-target="#counter">
+                Reset
+            </button>
+            ```
+            
+            The resulting HTML is the same `_Count` partial view.
+            
+            ```csharp
+            public IActionResult OnPostIncrement()
+            {
+                Value++;
+                return Partial("_Count", this);
+            }
+            ```
+            
+            It's as simple as that. Check out the code and try changing the backend code for different behaviors.
+        </markdown>
+        
+        @await Html.PartialAsync("_Paging", new PagingModel(1))
+    </div>
+    <div class="col">
+        @await Html.PartialAsync("_Count")
+    </div>
+</div>
