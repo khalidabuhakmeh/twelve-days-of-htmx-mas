@@ -3,11 +3,11 @@
 <table id="people" class="table">
     <thead class="bg-danger text-white">
     <tr hx-target="#people" hx-swap="outerHTML">
-        <th hx-get hx-page="Index" hx-route-SortBy="Id" scope="col" role="button">
+        <th hx-get hx-page="Index" hx-route-SortBy="Id" scope="col" role="button" style="width: 80px;">
             @if (Model.SortBy == nameof(Person.Id)) { <span>❄︎</span> }
             #
         </th>
-        <th hx-get hx-page="Index" hx-route-SortBy="Name" scope="col" role="button">
+        <th hx-get hx-page="Index" hx-route-SortBy="Name" scope="col" role="button" style="width: 180px;">
             @if (Model.SortBy == nameof(Person.Name)) { <span>❄︎</span> }
             Name
         </th>
