@@ -49,6 +49,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: var(--bs-danger);
   margin-bottom: 1rem;
+  border-bottom: 1px solid var(--bs-danger);
+  padding-bottom: 0.3em;
+}
+
+.card-header {
+  h1,h2, h3, h4, h5, h6 {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 }
 
 /* PrismJS 1.29.0

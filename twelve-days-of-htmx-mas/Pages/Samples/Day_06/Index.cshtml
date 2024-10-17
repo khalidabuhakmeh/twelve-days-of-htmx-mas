@@ -1,6 +1,10 @@
 @page
 @model Htmxmas.Pages.Samples.Day_06.IndexModel
 
+@{
+    ViewData["Title"] = "Day 6: Naughty or Nice?";
+}
+
 <div class="row">
     <div class="col-6">
         <markdown>
@@ -31,7 +35,7 @@
         @await Html.PartialAsync("_Paging", new PagingModel(6))
     </div>
     <div class="col-6">
-        <h4>Santa's Naughty &amp; Nice List</h4>
+        <h2 class="text-center">Santa's Naughty &amp; Nice List</h2>
         <p>Click the headers to sort</p>
         @await Html.PartialAsync("_Table")
     </div>

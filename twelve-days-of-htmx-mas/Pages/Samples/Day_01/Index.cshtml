@@ -1,6 +1,10 @@
 @page "/samples/day/01/"
 @model IndexModel
 
+@{
+    ViewData["Title"] = "Day 1: Hello Counter!";
+}
+
 <div class="row">
     <div class="col-6">
         <markdown>
@@ -56,6 +60,7 @@
         @await Html.PartialAsync("_Paging", new PagingModel(1))
     </div>
     <div class="col">
+        <h2 class="text-center">Can I Count On You?</h2>
         @await Html.PartialAsync("_Count")
     </div>
 </div>

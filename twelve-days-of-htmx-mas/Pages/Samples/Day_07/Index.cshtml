@@ -1,6 +1,9 @@
 @page
 @model Htmxmas.Pages.Samples.Day_07.IndexModel
 
+@{
+  ViewData["Title"] = "Gift Search As You Type";
+}
 
 <div class="row">
   <div class="col-6">
@@ -24,15 +27,17 @@
     @await Html.PartialAsync("_Paging", new PagingModel(7))
   </div>
   <div class="col-6">
+    <h2 class="text-center">Search For The Perfect Gift</h2>
+    
     <form hx-get
           method="get" asp-page="Index"
           hx-swap="outerHTML"
           hx-trigger="keyup changed delay:500ms"
           hx-target="#search-results">
       <div class="input-group mb-3">
-        <input type="text" asp-for="Search" 
-               class="form-control" 
-               placeholder="Search..." 
+        <input type="text" asp-for="Search"
+               class="form-control"
+               placeholder="Search..."
                aria-label="search criteria">
         <div class="input-group-append">
           <button class="btn btn-outline-danger" type="submit">Search</button>

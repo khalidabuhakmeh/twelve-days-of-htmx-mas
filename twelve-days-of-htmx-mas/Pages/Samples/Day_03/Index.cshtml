@@ -1,6 +1,10 @@
 @page
 @model Htmxmas.Pages.Samples.Day_03.Index
 
+@{
+    ViewData["Title"] = "Day 3: Everyone Loves a Modal";
+}
+
 <div class="row">
     <div class="col">
         <markdown>
@@ -37,7 +41,7 @@
         @await Html.PartialAsync("_Paging", new PagingModel(3))
     </div>
     <div class="col text-center">
-        <h3>Click gift to open</h3>
+        <h2>Click gift to open</h2>
         <a asp-page="Index"
            hx-get
            hx-page="Index"

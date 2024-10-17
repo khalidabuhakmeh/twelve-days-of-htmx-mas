@@ -1,7 +1,16 @@
 @model IndexModel
 
-<div class="alert alert-info">
-    <p>
-        Santa has released your request for "@Model.Present".
-    </p>
+<div class="alert alert-info text-center">
+     @if (Model.Behavior.Equals("Nice", StringComparison.OrdinalIgnoreCase))
+     {
+          <h3>🎁 Gift Released</h3>
+          <p>Santa has released your request for "@Model.Present". I'm sure you'll love it! ❤️</p>
+          <button class="btn btn-danger" onclick="location.reload()">♺ Reload</button>
+     }
+     else
+     {
+          <h3>✋ Gift Withheld</h3>
+          <p>Santa has noticed you're on the naughty list. Your request for "@Model.Present" will be released once you're nice.</p>
+          <button class="btn btn-danger" onclick="location.reload()">♺ Reload</button>
+     }
 </div>

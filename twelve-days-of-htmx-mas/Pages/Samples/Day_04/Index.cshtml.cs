@@ -11,7 +11,7 @@ public class Index : PageModel
         return Content(
             """
             <div class="alert alert-info">
-                 <h5>🎁 Gift Received</h5>
+                 <h3>🎁 Gift Received</h3>
                  <p>Thanks! I'm sure they'll love it! ❤️</p>
                  <button class="btn btn-danger" onclick="location.reload()">♺ Reload</button>
             </div>

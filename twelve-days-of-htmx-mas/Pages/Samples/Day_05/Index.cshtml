@@ -1,12 +1,15 @@
 @page
 @model Htmxmas.Pages.Samples.Day_05.Index
 
+@{
+    ViewData["Title"] = "Day 5: Infinite Scroll Sleigh Ride";
+}
+
 <div class="row">
     <style>
         .abs-wrapper {
             position: relative;
             width: 100%;
-            height: 100%;
             border: 10px solid black;
             border-radius: 10px;
         }
@@ -23,7 +26,7 @@
         }
         .sleigh {
             position: absolute;
-            bottom: 30px;
+            bottom: 1%;
             left: 1em;
             width: 25%;
         }
@@ -87,6 +90,7 @@
         @await Html.PartialAsync("_Paging", new PagingModel(5))
     </div>
     <div class="col-6">
+        <h2 class="text-center">Scroll Horizontally to Start</h2>
         <div class="abs-wrapper">
             <div
                 id="houses"

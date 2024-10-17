@@ -1,6 +1,10 @@
 @page
 @model Htmxmas.Pages.Samples.Day_12.IndexModel
 
+@{
+    ViewData["Title"] = "Day 12: Keyboard Shortcuts";
+}
+
 <div class="row">
     <div class="col-6">
         <markdown>
@@ -46,14 +50,14 @@
         <div class="card text-center">
             <div class="card-header">
                 <h2>Keyboard Shortcuts</h2>
-                <p>Press the keyboard keys of
-                    <kbd>H</kbd>, <kbd>J</kbd>, <kbd>M</kbd>, or <kbd>S</kbd>
-                </p>
+                
             </div>
             <div class="card-body">
                 <img id="card" src="~/img/cards/question.png" class="img-fluid" alt="question mark"/>
             </div>
             <div class="card-footer text-center" hx-target="#card" hx-swap="outerHTML">
+                <p>Press the keyboard keys of
+                </p>
                 <button class="btn btn-danger" hx-trigger="click, keyup[key=='h'||key=='H'] from:body"
                         hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="hat">
                     H

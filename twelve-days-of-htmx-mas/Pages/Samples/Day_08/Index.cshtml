@@ -1,6 +1,10 @@
 @page
 @model Htmxmas.Pages.Samples.Day_08.IndexModel
 
+@{
+    ViewData["Title"] = "Day 8: Progress Bars and Jobs";
+}
+
 <div class="row">
     <div class="col-6">
         <markdown>
@@ -20,7 +24,7 @@
         @await Html.PartialAsync("_Paging", new PagingModel(8))
     </div>
     <div class="col">
-        <h5>Important Workshop Tasks</h5>
+        <h2 class="text-center">Important Workshop Tasks</h2>
         <p>
             The elves are busy working on shipping gifts for all the boys and girls.
         </p>
