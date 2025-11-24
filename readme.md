@@ -14,7 +14,7 @@ Give it a try!
 
 ## Getting Started
 
-You will need [.NET 8 SDK](https://dot.net) and an IDE like [JetBrains Rider](https://jetbrains.com/rider). That's it!
+You will need [.NET 10 SDK](https://dot.net) and an IDE like [JetBrains Rider](https://jetbrains.com/rider). That's it!
 
 ## Acknowledgments
 
