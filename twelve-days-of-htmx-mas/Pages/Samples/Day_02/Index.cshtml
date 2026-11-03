@@ -16,9 +16,11 @@
             
             ## How Does This Work?
             
-            Seen in the `Day_02/_Form` partial view, the form is submitted using the `hx-post` attribute. This attribute tells Htmx to send the form data to the server using a POST request.The form is also configured to use the `hx-target` attribute to specify the element that should be updated with the response from the server. The form is progressively enhanced, so it can also submit data even if JavaScript is disabled. The form only has two Htmx attributes of `hx-post` and `hx-swap`.
+            Seen in the `Day_02/_Form` partial view, the form is submitted using the `hx-post` attribute. This attribute tells Htmx to send the form data to the server using a POST request. With no `hx-target`, the form itself is the target, and `hx-swap="outerHTML"` replaces the whole form with whatever the server sends back. The form is progressively enhanced, so it still submits as a plain HTML form when JavaScript is disabled. The form only has two Htmx attributes: `hx-post` and `hx-swap`.
+
+            **Why 422?** When validation fails, the server returns the form again with HTTP status `422 Unprocessable Content`. Htmx 4 swaps `4xx` and `5xx` responses by default (only `204` and `304` are skipped), so the form comes back with its validation messages. Htmx 2 silently ignored error responses, so a `200` was required. A 422 is the more honest status: the request was understood, but the data was invalid. Plain browsers happily render a 422 page too, so the no-JavaScript path keeps working.
             
-            **An Important Note: ASP.NET Core Antiforgery tokens are automatically added to all forms, but any non-GET request will require you to add an Antiforgery token yourself. Luckily, Htmx.Net can handle that for you.**
+            **An Important Note: ASP.NET Core Antiforgery tokens are automatically added to all forms, but any non-form, non-GET request will require you to add an Antiforgery token yourself. Luckily, Htmx.Net can handle that for you.**
             
             As is seen in the C# part of the interaction, it's very familiar-looking C# code.
             
@@ -27,6 +29,8 @@
             {
                 if (!ModelState.IsValid)
                 {
+                    // 422 tells htmx (and everyone else) the data was invalid
+                    Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
                     return Partial("_Form", this);
                 }
 

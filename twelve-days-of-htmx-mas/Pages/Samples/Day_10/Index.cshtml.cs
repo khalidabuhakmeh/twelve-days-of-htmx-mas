@@ -31,10 +31,10 @@ public class IndexModel : PageModel
         );
     }
 
-    public NoContentResult OnGetReset()
+    public ContentResult OnGetReset()
     {
         Response.Htmx(h => h.WithTrigger("reset"));
-        // don't return stuff
-        return new NoContentResult();
+        // empty 200 (htmx 4 does not process 204 swaps); button uses hx-swap="none"
+        return Content("");
     }
 }

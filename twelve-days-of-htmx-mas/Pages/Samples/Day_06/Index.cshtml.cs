@@ -30,7 +30,7 @@ public class IndexModel : PageModel
             _ => Data
         };
 
-        return Request.IsHtmx()
+        return Request.IsHtmxPartial()
             ? Partial("_Table", this)
             : Page();
     }

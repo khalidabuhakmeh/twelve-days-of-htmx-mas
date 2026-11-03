@@ -31,12 +31,19 @@
                           alt="colored sweater"
                           hx-swap-oob="true"
                           class="img-fluid"
-                          src="~/img/sweater_color.png" >
+                          src="{Url.Content("~/img/sweater_color.png")}" >
                      """
                 );
             }
             ```
             
+            In htmx 4 the main swap happens first, then out of band swaps run. Our buttons use `hx-swap="none"`, so
+            the main response is ignored and only the out of band `img` is swapped.
+
+            The Reset button asks the server to send an `HX-Trigger: reset` header. We listen for it with
+            `hx-trigger="reset from:body"`, because the event may be dispatched on the body rather than the button.
+            The server replies with an empty `200` (a `204` wouldn't be swapped at all in htmx 4).
+
             This technique is useful for replacing display elements such as a shopping cart, users on a site, account
             information, etc. 
             
@@ -51,9 +58,9 @@
         <div
             class="card text-center"
             hx-get
-            hx-page="Index"
-            hx-page-handler="UncoloredSweater"
-            hx-trigger="reset"
+            hxn-page="Index"
+            hxn-page-handler="UncoloredSweater"
+            hx-trigger="reset from:body"
             hx-target="#sweater"
             hx-swap="outerHTML"
             >
@@ -67,15 +74,15 @@
                 <button
                     type="button"
                     hx-get
-                    hx-page="Index"
-                    hx-page-handler="ColoredSweater"
+                    hxn-page="Index"
+                    hxn-page-handler="ColoredSweater"
                     hx-swap="none"
                     class="btn btn-danger">Color
                 </button>
                 <button type="button"
                         hx-get
-                        hx-page="Index"
-                        hx-page-handler="Reset"
+                        hxn-page="Index"
+                        hxn-page-handler="Reset"
                         hx-swap="none"
                         class="btn btn-outline-danger">Reset
                 </button>

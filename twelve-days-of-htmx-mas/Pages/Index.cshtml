@@ -1,4 +1,4 @@
-﻿@page
+@page
 @model IndexModel
 @{
     ViewData["Title"] = "12 Days of Htmx-mas";
@@ -12,18 +12,18 @@
             "/Samples/Day_01/Index"),
         new(2,
             "Santa's Request Form",
-            "Good Ol' Form example powered by Htmx.",
+            "A good old-fashioned form, with server-side validation, powered by Htmx.",
             "~/img/02-santa-list.png",
             "/Samples/Day_02/Index"
         ),
         new(3,
             "Gift Unwrap Modals",
-            "Server-side modals powered by Htmx and Bootstrap.",
+            "Server-rendered modals powered by Htmx and a native dialog element.",
             "~/img/03-gift-unwrap.png",
             "/Samples/Day_03/Index"),
         new(4,
             "Drag & Drop Gifts",
-            "Complex user interaction scenario made simple by using Htmx.",
+            "A complex drag-and-drop interaction, made simple with Htmx.",
             "~/img/04-drag-and-drop-tree.png",
             "/Samples/Day_04/Index"),
         new(5,
@@ -33,17 +33,17 @@
             "/Samples/Day_05/Index"),
         new(6,
             "Naughty & Nice List",
-            "What would an app be without a table component?",
+            "What would an app be without a sortable table?",
             "~/img/06-naughty-list.png",
             "Samples/Day_06/Index"),
         new(7,
             "Gift Delivery Search",
-            "A snappy search-as-you-type experience with Htmx. ",
+            "A snappy search-as-you-type experience with Htmx.",
             "~/img/07-delivery-search.png",
             "Samples/Day_07/Index"),
         new(8,
             "Progress Bar",
-            "Making progress bars with server-side data and Htmx.",
+            "Progress bars driven by server-side data and Htmx.",
             "~/img/08-progress-bar.png",
             "Samples/Day_08/Index"),
         new(9,
@@ -53,75 +53,67 @@
             "Samples/Day_09/Index"),
         new(10,
             "Out of Band Sweaters",
-            "The ultimate ability to swap elements into a page.",
+            "Swap several elements on the page with a single response.",
             "~/img/10-sweater.png",
             "Samples/Day_10/Index"),
         new(11,
             "Confirmations",
-            "Protecting users from accidents using confirmation messages.",
+            "Protect users from accidents with confirmation messages.",
             "~/img/11-confirm.png",
             "Samples/Day_11/Index"),
         new(12,
             "Keyboard Shortcuts",
-            "Power users will love keyboard shortcuts with Htmx.",
+            "Power users will love keyboard shortcuts in Htmx.",
             "~/img/12-keyboard.png",
             "Samples/Day_12/Index"),
     ];
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <markdown>
-                # 12 Days of Htmx-mas
+<div class="intro">
+    <markdown>
+        # 12 Days of Htmx-mas
 
-                [Htmx](https://htmx.org) is a new, yet familiar way to build web applications. It's a lightweight,
-                no-build, server-powered approach to building modern web experiences. It's made even better by the
-                pairing of [ASP.NET Core](https://asp.net) as the backend technology creating and serving HTML snippets.
-                ASP.NET Core's [Razor](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor)
-                templating engine makes it easy to create reusable components and take advantage of the full power of C#
-                and ASP.NET Core TagHelpers. How easy? In fact, this website is built with Htmx and Razor!
+        [Htmx](https://htmx.org) lets you build modern, interactive web apps with plain HTML attributes. There is no build step and
+        no JavaScript framework to wrangle: the server renders HTML, and Htmx swaps it into the page. It gets even better
+        when the server is [ASP.NET Core](https://asp.net), because the
+        [Razor](https://learn.microsoft.com/aspnet/core/mvc/views/razor) templating engine makes reusable HTML partials
+        and C# TagHelpers a breeze. Don't take our word for it: this very website is built with Htmx and Razor!
 
-                You can try out all 12 samples below, where we explore common scenarios you may encounter building your
-                own web applications. Go through all 12 days to learn how you can use Htmx to build amazing solutions.
-                
-                ## Getting Started with Htmx
-                
-                To install Htmx, all you need to do is add the following script to your web application:
-                
-                ```html
-                <script src="https://unpkg.com/htmx.org@2.0.3"></script>
-                ```
-                
-                You can learn more about Htmx on the [official website](https://htmx.org). You can also download the
-                script and reference it from an app directory.
-                
-                Optionally, you can also install the Htmx.Net library to make it easier to use Htmx in your .NET
-                applications.
-                
-                ```console
-                dotnet add package Htmx
-                dotnet add package Htmx.TagHelpers
-                ```
-                This solution uses the NuGet package to make it a more enjoyable experience to author Htmx applications.
-                
-                Enjoy!
-            </markdown>
-            <hr class="mb-3 text-danger" />
-        </div>
-    </div>
+        Open a door below to try all 12 samples. Each one tackles a scenario you will run into in your own web
+        applications, from counters and forms to infinite scroll and keyboard shortcuts. Work through all 12 days and
+        you'll be ready to build something wonderful with Htmx.
 
+        ## Getting Started with Htmx
 
-    @{ var index = 0; }
-    @for (var row = 0; row < 3; row++)
-    {
-        <div class="row">
-            @for (var col = 0; col < 4; col++)
-            {
-                <div class="col">
-                    @await Html.PartialAsync("_Card", details[index++])
-                </div>
-            }
-        </div>
-    }
+        To install Htmx, add the following script to your web application:
+
+        ```html
+        <script src="https://cdn.jsdelivr.net/npm/htmx.org@4.0.1/dist/htmx.min.js"></script>
+        ```
+
+        Learn more on the [official website](https://htmx.org). You can also download the script and serve it
+        from your own app.
+
+        Optionally, add the Htmx.Net libraries to make Htmx more enjoyable to use from .NET. Htmx.Net 2.0 is
+        currently a preview release, so include the `--prerelease` flag:
+
+        ```console
+        dotnet add package Htmx --prerelease
+        dotnet add package Htmx.TagHelpers --prerelease
+        ```
+
+        This solution uses those NuGet packages, which makes authoring Htmx applications a lot more pleasant.
+
+        Enjoy, and happy Htmx-mas!
+    </markdown>
 </div>
+
+<hr/>
+
+<h2 id="calendar">Pick a day</h2>
+<ol class="advent-grid" aria-labelledby="calendar">
+    @foreach (var detail in details)
+    {
+        <li>@await Html.PartialAsync("_Card", detail)</li>
+    }
+</ol>

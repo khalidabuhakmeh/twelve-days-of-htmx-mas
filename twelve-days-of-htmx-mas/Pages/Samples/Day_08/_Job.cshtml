@@ -1,11 +1,11 @@
 @model IndexModel
 
-<div class="card" hx-target="this" hx-swap="outerHTML">
+<div id="job-card" class="card">
     <div class="card-header">
         <h2>Start Progress</h2>
     </div>
     <div class="card-body">
-        <button class="btn btn-danger" hx-post hx-page="Index" hx-page-handler="Start">
+        <button class="btn btn-danger" hx-post hxn-page="Index" hxn-page-handler="Start">
             Start Job
         </button>
     </div>

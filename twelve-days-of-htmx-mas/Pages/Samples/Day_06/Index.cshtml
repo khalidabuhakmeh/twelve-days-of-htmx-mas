@@ -18,17 +18,20 @@
             
             ## How Does This Work?
             
-            Each column on the table has an `hx-get` attribute that triggers a request to the server that returns the data sorted by that column. After the 
-            server returns the response, the table is switched into place.
+            Each column header has an `hx-get` attribute that asks the server for the data sorted by that column. In htmx 4, attributes are no longer inherited implicitly, so the row opts in with `hx-target:inherited` and `hx-swap:inherited`. After the 
+            server responds, the table is swapped into place.
             
             ```razor
-            <tr hx-target="#people" hx-swap="outerHTML">
-                <th hx-get hx-page="Index" hx-route-SortBy="Id" scope="col" role="button">
+            <tr hx-target:inherited="#people" hx-swap:inherited="outerHTML">
+                <th tabindex="0" hx-trigger="click, keyup[key=='Enter'], keyup[key==' ']"
+                    hx-get hxn-page="Index" hxn-route-SortBy="Id" scope="col" role="button">
                     @@if (Model.SortBy == nameof(Person.Id)) { <span>❄︎</span> } #
                 </th>
                 <!-- more columns -->
             </tr>
             ```
+            Each header has `tabindex="0"` and an `hx-trigger` that also fires on Enter and Space, so keyboard users can sort too.
+
             To track which column is being sorted, you can always pass data back and forth to manage the sorting state. 
         </markdown>
         
@@ -36,7 +39,7 @@
     </div>
     <div class="col-6">
         <h2 class="text-center">Santa's Naughty &amp; Nice List</h2>
-        <p>Click the headers to sort</p>
+        <p>Click the headers (or focus and press Enter or Space) to sort</p>
         @await Html.PartialAsync("_Table")
     </div>
 </div>

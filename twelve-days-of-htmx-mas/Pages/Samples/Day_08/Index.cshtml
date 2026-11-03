@@ -10,13 +10,13 @@
         <markdown>
             # Day 8: Progress Bars and Jobs
             
-            Server-based applications allow for user's to start asynchronous jobs that can be monitored and managed. One of the most common UI patterns is to show a progress bar while the job is running and then update the UI when the job is complete.
+            Server-based applications allow for users to start asynchronous jobs that can be monitored and managed. One of the most common UI patterns is to show a progress bar while the job is running and then update the UI when the job is complete.
             
             This particular example shows how to start and monitor a job using Htmx.
             
             ## How Does This Work?
             
-            When you start the job, we return an element with a timer trigger, which periodically checks the job status on the server. If the job is not complete, the progress bar will update with the completeness percentage. If the job is complete, the progress bar is set to 100% and the trigger is finally set to `none`, disabling any more updates to the progress bar.
+            When you start the job, we return an element with a timer trigger, which periodically checks the job status on the server. If the job is not complete, the progress bar will update with the completeness percentage. The bar itself is a plain `div` whose `width` style is set by the server, styled with a few lines of CSS (no framework needed). If the job is complete, the progress bar is set to 100% and the server returns markup whose trigger is `none`, so polling stops by itself. (htmx 4 dropped the special HTTP 286 stop-polling status; swapping in a non-polling element does the job.)
             
             This technique is useful for more interactive and monitoring scenarios where you want to track the status of any resource on the server.
         </markdown>

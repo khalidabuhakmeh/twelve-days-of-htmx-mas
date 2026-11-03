@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddMarkdown();
+builder.Services.AddAntiforgery(o => o.HeaderName = "RequestVerificationToken");
 
 
 var app = builder.Build();
@@ -20,6 +21,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
+app.UseAntiforgery();
 app.UseStaticFiles();
 app.MapRazorPages();
 

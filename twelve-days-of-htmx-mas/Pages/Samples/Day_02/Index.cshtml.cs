@@ -31,6 +31,8 @@ public class IndexModel : PageModel
     {
         if (!ModelState.IsValid)
         {
+            // 422 = "I understood you, but the data is invalid". htmx 4 swaps 4xx responses by default.
+            Response.StatusCode = StatusCodes.Status422UnprocessableEntity;
             return Partial("_Form", this);
         }
 

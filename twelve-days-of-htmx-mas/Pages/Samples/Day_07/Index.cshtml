@@ -15,13 +15,13 @@
       
       ## How Does This Work?
       
-      You can look at the code on this page, but in general, we listed for the `changed` event on any input located
-      within our HTML form with a delay of `500ms`. When this event fires, we make a request to the server with the
+      You can look at the code on this page, but in general, we listen for `keyup` on the input, but only when its value has `changed`, with a delay of `500ms`.
+      The trigger lives directly on the input, which keeps it valid in htmx 4. When it fires, we make a request to the server with the
       search criteria. The server then returns a list of results. We then swap the contents of our search results
       container with the results.
       
-      Using an HTML form allows us to send more information than just what the user types. This could include radio buttons, checkboxes,
-      or other information that is relevant to the search.
+      The input sends its own value with the request. Need more than what the user types, like radio buttons or checkboxes?
+      Add an `hx-include` pointing at the surrounding form (or any other fields).
     </markdown>
     
     @await Html.PartialAsync("_Paging", new PagingModel(7))
@@ -29,13 +29,13 @@
   <div class="col-6">
     <h2 class="text-center">Search For The Perfect Gift</h2>
     
-    <form hx-get
-          method="get" asp-page="Index"
-          hx-swap="outerHTML"
-          hx-trigger="keyup changed delay:500ms"
-          hx-target="#search-results">
+    <form method="get" asp-page="Index">
       <div class="input-group mb-3">
         <input type="text" asp-for="Search"
+               hx-get hxn-page="Index"
+               hx-trigger="keyup changed delay:500ms"
+               hx-target="#search-results"
+               hx-swap="outerHTML"
                class="form-control"
                placeholder="Search..."
                aria-label="search criteria">

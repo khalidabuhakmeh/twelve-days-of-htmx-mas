@@ -21,15 +21,18 @@
             ## How Does This Work?
             
             Add a `hx-confirm` attribute to any Htmx element along with a message. The user will be prompted to
-            either confirm or cancel the action. It's that simple.
+            either confirm or cancel the action. It's that simple. The prompt is the browser's native `confirm()` dialog.
+
+            In htmx 4, attributes are no longer inherited by child elements unless you opt in. If you put
+            the confirmation on a parent element, use `hx-confirm:inherited`. Here each button has its own message.
             
             ```razor
             <button hx-get
-                    hx-page="Index"
-                    hx-page-handler="Allow"
+                    hxn-page="Index"
+                    hxn-page-handler="Allow"
                     hx-target="#rudolph"
                     hx-swap="outerHTML"
-                    hx-confirm="Are you sure you want to play the reinder games?"
+                    hx-confirm="Are you sure you want to let Rudolph join the reindeer games?"
                     class="btn btn-danger">
                 Allow
             </button>
@@ -50,20 +53,20 @@
             </div>
             <div class="card-footer text-center">
                 <button hx-get
-                        hx-page="Index"
-                        hx-page-handler="Allow"
+                        hxn-page="Index"
+                        hxn-page-handler="Allow"
                         hx-target="#rudolph"
                         hx-swap="outerHTML"
-                        hx-confirm="Are you sure you want to play the reinder games?"
+                        hx-confirm="Are you sure you want to let Rudolph join the reindeer games?"
                         class="btn btn-danger">
                     Allow
                 </button>
                 <button hx-get
-                        hx-page="Index"
-                        hx-page-handler="Disallow"
+                        hxn-page="Index"
+                        hxn-page-handler="Disallow"
                         hx-target="#rudolph"
                         hx-swap="outerHTML"
-                        hx-confirm="Are you sure you want to stop the reinder games?"
+                        hx-confirm="Are you sure you want to keep Rudolph out of the reindeer games?"
                         class="btn btn-outline-danger">
                     Disallow
                 </button>

@@ -10,22 +10,16 @@
         <markdown>
             # Day 4: What a Drag!
             
-            Htmx works on "triggers", and typically these triggers are click events on an element. That said, Htmx can also work with any JavaScript event that you want. In this example, we'll use the `drop` event to trigger a request to the server.
+            htmx works on "triggers", and typically these triggers are click events on an element. That said, htmx can also work with any JavaScript event that you want. In this example, we'll use the `drop` event to trigger a request to the server.
             
             Drag the gift under the tree to trigger the request.
             
             ## How Does This Work?
             
-            Htmx uses the `hx-trigger` attribute to specify the event that should trigger the request. In this case, we're using the `drop` event. We need a little more JavaScript to handle the event, but it's very minimal as you can see below.
+            Htmx uses the `hx-trigger` attribute to specify the event that should trigger the request. In this case, we're using the `drop` event. Browsers only allow a drop if `dragover` is cancelled, so we add one tiny `hx-on:dragover` attribute that calls `event.preventDefault()`. No script block required.
             
             ```razor
             <div class="col">
-                <!-- allow drop by disabling drag over event -->
-                <script>
-                    function allowDrop(e) {
-                        e.preventDefault();
-                    }
-                </script>
                 <div id="livingRoom" class="row text-center">
                     <h4 class="text-center">Drag the gift under the tree</h4>
                     <div class="col">
@@ -34,11 +28,11 @@
                     </div>
                     <div
                         hx-get
-                        hx-page="Index"
-                        hx-page-handler="Drop"
+                        hxn-page="Index"
+                        hxn-page-handler="Drop"
                         hx-trigger="drop"
                         hx-target="#livingRoom"
-                        ondragover="allowDrop(event)"
+                        hx-on:dragover="event.preventDefault()"
                         class="col">
                         <img src="~/img/tree.svg" width="400" height="400" alt="tree"/>
                     </div>
@@ -70,12 +64,6 @@
         @await Html.PartialAsync("_Paging", new PagingModel(4))
     </div>
      <div class="col-6">
-        <!-- allow drop by disabling drag over event -->
-        <script>
-            function allowDrop(e) {
-                e.preventDefault();
-            }
-        </script>
         <div id="livingRoom" class="row text-center">
             <h2 class="text-center">Drag the gift under the tree</h2>
             <div class="col">
@@ -84,11 +72,11 @@
             </div>
             <div
                 hx-get
-                hx-page="Index"
-                hx-page-handler="Drop"
+                hxn-page="Index"
+                hxn-page-handler="Drop"
                 hx-trigger="drop"
                 hx-target="#livingRoom"
-                ondragover="allowDrop(event)"
+                hx-on:dragover="event.preventDefault()"
                 class="col">
                 <img src="~/img/tree.svg" width="400" height="400" alt="tree"/>
             </div>

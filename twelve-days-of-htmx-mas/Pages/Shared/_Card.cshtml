@@ -1,11 +1,11 @@
 @model ViewModels.CardDetails
 
-<div class="card mb-3">
-    <div class="card-header mountains-of-christmas-regular bg-danger text-white">#@Model.Number</div>
-    <img class="card-img-top" src="@Url.Content(@Model.ImageUrl)" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title mountains-of-christmas-bold">@Model.Title</h5>
-        <p class="card-text">@Model.Description</p>
-        <a asp-page="@Model.Page" class="btn btn-outline-danger">Learn Now</a>
+<article class="advent">
+    <div class="advent-number" aria-hidden="true">#@Model.Number</div>
+    <img src="@Url.Content(@Model.ImageUrl)" alt="Screenshot of the sample for day @Model.Number: @Model.Title" loading="lazy" width="640" height="400"/>
+    <div class="advent-body">
+        <h3>@Model.Title</h3>
+        <p>@Model.Description</p>
+        <a asp-page="@Model.Page" class="advent-link">Learn Now<span class="visually-hidden"> about day @Model.Number: @Model.Title</span></a>
     </div>
-</div>
+</article>

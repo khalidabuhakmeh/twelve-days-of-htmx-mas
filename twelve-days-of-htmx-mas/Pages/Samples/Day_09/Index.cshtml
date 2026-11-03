@@ -27,6 +27,21 @@
             .smooth {
                 transition: all 1s ease-in;
             }
+            @@media (max-width: 575.98px) {
+                .smooth[id^="cell"] {
+                    width: 100% !important;
+                    height: auto !important;
+                    max-width: 100px;
+                    aspect-ratio: 1 / 1;
+                }
+                .smooth[id^="cell"] img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+                .smooth[id^="cell"] { margin: 0 auto; }
+                .container .d-flex > .m-2 { flex: 1 1 0; min-width: 0; margin: .25rem !important; }
+            }
         </style>
         <div class="container">
             <h2 class="text-center">The Glow of Lights</h2>

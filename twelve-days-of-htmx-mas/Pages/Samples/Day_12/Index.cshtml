@@ -22,12 +22,17 @@
             to listen for the keyboard shortcut. The `key` attribute is used to specify the key that should be pressed.
             
             ```html
-            <button class="btn btn-danger" hx-trigger="click, keyup[key=='h'||key=='H'] from:body"
-                    hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="hat">
-                H
-            </button>
+            <div hx-target:inherited="#card" hx-swap:inherited="outerHTML">
+                <button class="btn btn-danger" hx-trigger="click, keyup[key=='h'||key=='H'] from:body"
+                        hx-post hxn-page="Index" hxn-page-handler="Card" hxn-route-card="hat">
+                    H
+                </button>
+            </div>
             ```
             
+            The footer holding the buttons sets `hx-target:inherited="#card"` and `hx-swap:inherited="outerHTML"`. In htmx 4
+            children only inherit attributes when you use the `:inherited` suffix.
+
             It's important to note that the `from:body` is needed, since the event is triggered from the body of the page. We also
             listen for casing variants of the specific letter key. You can also listen for multiple keys to be pressed at once for a
             more complex shortcut.
@@ -45,6 +50,13 @@
                 opacity: 1;
                 transition: opacity 1s ease-out;
             }
+
+            @@media (prefers-reduced-motion: reduce) {
+                #card, #card.htmx-added {
+                    transition: none;
+                    animation: none;
+                }
+            }
         </style>
 
         <div class="card text-center">
@@ -55,23 +67,23 @@
             <div class="card-body">
                 <img id="card" src="~/img/cards/question.png" class="img-fluid" alt="question mark"/>
             </div>
-            <div class="card-footer text-center" hx-target="#card" hx-swap="outerHTML">
-                <p>Press the keyboard keys of
+            <div class="card-footer text-center" hx-target:inherited="#card" hx-swap:inherited="outerHTML">
+                <p>Press the keyboard keys for a clothing item:
                 </p>
                 <button class="btn btn-danger" hx-trigger="click, keyup[key=='h'||key=='H'] from:body"
-                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="hat">
+                        hx-post hxn-page="Index" hxn-page-handler="Card" hxn-route-card="hat">
                     H
                 </button>
                 <button class="btn btn-danger" hx-trigger="click, keyup[key=='j'||key=='J'] from:body"
-                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="jacket">
+                        hx-post hxn-page="Index" hxn-page-handler="Card" hxn-route-card="jacket">
                     J
                 </button>
                 <button class="btn btn-danger" hx-trigger="click, keyup[key=='m'||key=='M'] from:body"
-                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="mittens">
+                        hx-post hxn-page="Index" hxn-page-handler="Card" hxn-route-card="mittens">
                     M
                 </button>
                 <button class="btn btn-danger" hx-trigger="click, keyup[key=='s'||key=='S'] from:body"
-                        hx-post hx-page="Index" hx-page-handler="Card" hx-route-card="socks">
+                        hx-post hxn-page="Index" hxn-page-handler="Card" hxn-route-card="socks">
                     S
                 </button>
             </div>

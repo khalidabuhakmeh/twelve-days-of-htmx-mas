@@ -1,8 +1,5 @@
 @model IndexModel
 
-@{
-  var trigger = Model.IsComplete ? "done" : "every 600ms";
-}
 
 <div id="progress-area" class="card">
   <div class="card-header">
@@ -13,15 +10,15 @@
   <div class="card-body">
     <div
       hx-get
-      hx-page="Index"
-      hx-page-handler="Progress"
-      hx-route-CurrentProgress="@Model.CurrentProgress"
-      hx-trigger="@trigger"
+      hxn-page="Index"
+      hxn-page-handler="Progress"
+      hxn-route-CurrentProgress="@Model.CurrentProgress"
+      hx-trigger="@(Model.IsComplete ? "none" : "every 600ms")"
       hx-target="#progress-area"
       hx-swap="outerHTML">
-      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-           aria-labelledby="pblabel">
-        <div id="pb" class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Model.CurrentProgress"
+           aria-label="Job progress">
+        <div id="pb" class="progress-bar"
              style="width:@Model.CurrentProgress%">
         </div>
       </div>
@@ -33,8 +30,8 @@
     {
       <button class="btn btn-danger mt-3"
               hx-post
-              hx-page="Index"
-              hx-page-handler="Start"
+              hxn-page="Index"
+              hxn-page-handler="Start"
               hx-target="#progress-area"
               hx-swap="outerHTML">
         Restart Job
