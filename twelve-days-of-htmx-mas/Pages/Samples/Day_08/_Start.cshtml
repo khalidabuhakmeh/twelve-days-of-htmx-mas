@@ -1,47 +1,40 @@
 @model IndexModel
 
-
-<div id="progress-area" class="card">
-  <div class="card-header">
-    <h2 role="status" tabindex="-1">
-      @(Model.IsComplete ? "Job Complete" : "Job In Progress")
-    </h2>
-  </div>
-  <div class="card-body">
-    <div
-      hx-get
-      hxn-page="Index"
-      hxn-page-handler="Progress"
-      hxn-route-CurrentProgress="@Model.CurrentProgress"
-      hx-trigger="@(Model.IsComplete ? "none" : "every 600ms")"
-      hx-target="#progress-area"
-      hx-swap="outerHTML">
-      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Model.CurrentProgress"
-           aria-label="Job progress">
-        <div id="pb" class="progress-bar"
-             style="width:@Model.CurrentProgress%">
-        </div>
+<div id="progress-area" class="workshop">
+  <h3 class="workshop-title" role="status" tabindex="-1">
+    @(Model.IsComplete ? "Job Complete" : "Job In Progress")
+  </h3>
+  <div
+    hx-get
+    hxn-page="Index"
+    hxn-page-handler="Progress"
+    hxn-route-CurrentProgress="@Model.CurrentProgress"
+    hx-trigger="@(Model.IsComplete ? "none" : "every 600ms")"
+    hx-target="#progress-area"
+    hx-swap="outerHTML">
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Model.CurrentProgress"
+         aria-label="Job progress">
+      <div id="pb" class="progress-bar"
+           style="width:@Model.CurrentProgress%">
       </div>
     </div>
+    <p class="workshop-meter" aria-hidden="true">@(Model.IsComplete ? "🎅" : "🎁") @Math.Min(100, Model.CurrentProgress)%</p>
   </div>
-
-  <div class="card-footer">
-    @if (Model.IsComplete)
-    {
-      <button class="btn btn-danger mt-3"
-              hx-post
-              hxn-page="Index"
-              hxn-page-handler="Start"
-              hx-target="#progress-area"
-              hx-swap="outerHTML">
-        Restart Job
-      </button>
-    }
-    else
-    {
-      <button class="btn btn-outline-dark mt-3" disabled="disabled">
-        Restart Job
-      </button>
-    }
-  </div>
+  @if (Model.IsComplete)
+  {
+    <button class="btn btn-danger"
+            hx-post
+            hxn-page="Index"
+            hxn-page-handler="Start"
+            hx-target="#progress-area"
+            hx-swap="outerHTML">
+      Restart Job
+    </button>
+  }
+  else
+  {
+    <button class="btn btn-outline-dark" disabled="disabled">
+      Restart Job
+    </button>
+  }
 </div>

@@ -663,3 +663,21 @@ body::before {
   .ornaments a { min-width: 6rem; padding-inline: 1rem; }
   .site-nav a { padding-inline: .75rem; }
 }
+
+/* Day 8: one flat workshop panel (no nested cards) */
+.workshop {
+  background: var(--surface);
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 4vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .75rem;
+}
+.workshop > * { margin: 0; }
+.workshop-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--accent); }
+.workshop-note { color: var(--ink-soft); }
+.workshop > div { align-self: stretch; }
+.workshop .progress { border: 0; box-shadow: inset 0 0 0 2px var(--line); }
+.workshop-meter { margin: .4rem 0 0; font-weight: 700; color: var(--ink-soft); font-variant-numeric: tabular-nums; }

@@ -1,12 +1,9 @@
 @model IndexModel
 
-<div id="job-card" class="card">
-    <div class="card-header">
-        <h2>Start Progress</h2>
-    </div>
-    <div class="card-body">
-        <button class="btn btn-danger" hx-post hxn-page="Index" hxn-page-handler="Start">
-            Start Job
-        </button>
-    </div>
+<div id="job-card" class="workshop">
+    <h3 class="workshop-title"><span aria-hidden="true">🎁</span> Ready to wrap gifts?</h3>
+    <p class="workshop-note">The elves are standing by.</p>
+    <button class="btn btn-danger" hx-post hxn-page="Index" hxn-page-handler="Start" hx-target="#job-card" hx-swap="outerHTML">
+        Start Job
+    </button>
 </div>

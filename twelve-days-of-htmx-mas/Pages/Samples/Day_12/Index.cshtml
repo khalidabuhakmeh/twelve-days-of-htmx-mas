@@ -46,6 +46,10 @@
                 opacity: 0;
             }
 
+            .card-footer > p { flex: 0 0 100%; margin: 0; }
+            .card-footer .keys { display: flex; flex-wrap: nowrap; gap: .5rem; justify-content: center; }
+            .card-footer .keys .btn { min-width: 3rem; }
+
             #card {
                 opacity: 1;
                 transition: opacity 1s ease-out;
@@ -70,6 +74,7 @@
             <div class="card-footer text-center" hx-target:inherited="#card" hx-swap:inherited="outerHTML">
                 <p>Press the keyboard keys for a clothing item:
                 </p>
+                <div class="keys">
                 <button class="btn btn-danger" hx-trigger="click, keyup[key=='h'||key=='H'] from:body"
                         hx-post hxn-page="Index" hxn-page-handler="Card" hxn-route-card="hat">
                     H
@@ -86,6 +91,7 @@
                         hx-post hxn-page="Index" hxn-page-handler="Card" hxn-route-card="socks">
                     S
                 </button>
+                </div>
             </div>
         </div>
 
